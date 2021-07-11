@@ -6,13 +6,22 @@ const express = require('express);
 // Inititlize Express App
 const app = express.app();
 
+//Initilize Express Body Parser Middleware
+app.use(express.json());
+app.use(express.urlencoded({extended: false}));
+
 // Create your endpoints/route handlers
 app.get('/', (req, res) => {
     res.send('Hello World')
 });
 
+// Define port for production and development
+const PORT = process.env.PORT || 5000;
+
 // Listen on a port
-app.listen(5000)
+app.listen(PORT, () => {
+    console.log(`Server Running On Port ${PORT}`)
+});
 ```
 
 # Basic Route Handling

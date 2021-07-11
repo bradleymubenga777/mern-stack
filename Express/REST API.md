@@ -26,7 +26,7 @@ app.get('/api/members', (req, res) => {
 ```
 
 ```
-//Get Single Member
+// Get Single Member
 app.get('/api/members/:id), (req, res) => {
     // If the id is a intiger we have to use parseInt because json data is formated as strings.
     //We have to check igf there is a memeber or not, then send the right http request.
@@ -43,6 +43,7 @@ app.get('/api/members/:id), (req, res) => {
 ```
 
 ```
+// Create Member
 app.post('/', (req, res) => {
     //MAKE SURE EXPRESS PARSER IS USED AS MIDDLEWARE, OTHERWISE IT WILL NOT WORK!
     const newMember = {
@@ -62,4 +63,41 @@ app.post('/', (req, res) => {
 ```
 
 ```
+// Update Member
+app.put('/api/members/:id), (req, res) => {
+    // If the id is a intiger we have to use parseInt because json data is formated as strings.
+    //We have to check igf there is a memeber or not, then send the right http request.
+    const found = memebers.some(member => member.id === parseInt(req.params.id))
+
+    if (found) {
+        const updMember = req.body;
+        member.forEach(member => {
+            if(memeber.id == parseInt(re.params.id)) {
+                member.name = updMember.name ? updMember.name : member.name;
+                member.email = updMember.email ? updMember.name : member.name;
+
+                res.json({msg: 'Member updated', member})
+            }
+        })
+    }
+
+    else {
+        res.status(400).json({msg: `No member with the id of ${req.params.id}});
+    }
+}
+```
+
+```
+// Get All Members
+app.delete('/api/members', (req, res) => {
+    const found = members.some(member => member.id === parseInt(re.params.id));
+
+    if (found) {
+        res.json({ msg: 'Member deleted', members: members.filter(member => member.id !== parseInt(req.params.id))})
+    }
+
+    else {
+        res.status(400).json({msg: `No member with the id of ${req.params.id}});
+    }
+});
 ```
